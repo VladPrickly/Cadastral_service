@@ -8,3 +8,40 @@ API - сервис, который принимает запрос с указа
  - "/ping" - проверка, что  сервер запустился
  - "/history" - для получения истории запросов
  - "/result" - эндпоинт эмулируемоего сервера, который возвращает true или false
+
+## Предварительные требования
+- Python 3.12+
+- Git
+- PostgreSQL
+- Docker и Docker Compose
+- Доступ к интернету
+
+## Установка
+1. Создайте виртуальное окружение:
+- Windows:
+  ```
+  python -m venv .venv
+  ```
+- Linux/macOS:
+  ```
+  python3 -m venv .venv
+  ```
+
+2. Активируйте виртуальное окружение:
+- Windows:
+  ```
+  venv\Scripts\activate
+  ```
+- Linux/macOS:
+  ```
+  source venv/bin/activate
+  ```
+3. Установите зависимости:
+pip install -r requirements.txt
+
+4. Запуск приложения:
+- создание БД: docker-compose up
+- запуск приложения uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+Приложение запустится локально на http://localhost:8000/. БД будет создана при первом запуске.
+
