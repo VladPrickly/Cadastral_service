@@ -19,6 +19,25 @@ API - сервис, который принимает запрос с указа
 - Docker и Docker Compose
 - Доступ к интернету
 
+## Структура проекта
+  ```
+  cadastral_service/
+  ├── app/
+  │   ├── __init__.py
+  │   ├── congig.py
+  │   ├── db.py
+  │   ├── lifespan.py
+  │   ├── main.py
+  │   ├── models.py
+  │   └── schemas.py
+  ├── README.md
+  ├── .env
+  ├── .gitignore
+  ├── requirements.txt
+  ├── Dockerfile
+  └── docker-compose.yml
+  ```
+
 ## Установка и удаление
 1. Создайте виртуальное окружение:
 - Windows:
@@ -55,5 +74,34 @@ API - сервис, который принимает запрос с указа
   docker-compose down -v
   ```
 
+## Проверка работы
+  ```
+  curl http://localhost:8000/ping
+  Ответ: 
+  {"status":"ok"}
+  ```
 
+  ```
+  curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"cadastral_number": "77:01:1234567:890", "latitude": 56.78, "longitude": 43.21}'
+  Ответ:
+  {
+    "id": 1,
+    "cadastral_number": "77:01:1234567:890",
+    "latitude": 56.78,
+    "longitude": 43.21,
+    "result": true,
+    "created_at": "2026-07-27T21:34:56.789Z"
+  }
+  ```
 
+  ```
+  curl http://localhost:8000/result
+  Ответ:
+  {"result":true}
+  ```
+
+  ```
+  curl http://localhost:8000/history
+  ```
