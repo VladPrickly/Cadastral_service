@@ -3,7 +3,7 @@ services:
 
   db:
     image: postgres:15-alpine
-    container_name: cadastral_service_postgres_db
+    container_name: cadastral_service_postgres
     ports:
       - "5432:5432"
     environment:
@@ -22,7 +22,7 @@ services:
 
   app:
     build: .
-    container_name: cadastral_service_app
+    container_name: cadastral_service
     ports:
       - "8000:8000"
     depends_on:
