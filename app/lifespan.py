@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from db import init_db
+from .db import init_db
 
 
 @asynccontextmanager

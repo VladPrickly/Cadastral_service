@@ -24,7 +24,7 @@ API - сервис, который принимает запрос с указа
   cadastral_service/
   ├── app/
   │   ├── __init__.py
-  │   ├── congig.py
+  │   ├── config.py
   │   ├── db.py
   │   ├── lifespan.py
   │   ├── main.py

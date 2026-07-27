@@ -7,10 +7,10 @@ import asyncio
 import random
 from typing import Optional
 
-from models import CadastralQuery
-from schemas import QueryRequest, QueryResponse
-from db import init_db, get_db
-from lifespan import lifespan
+from .models import CadastralQuery
+from .schemas import QueryRequest, QueryResponse
+from .db import init_db, get_db
+from .lifespan import lifespan
 
 
 app = FastAPI(title="Cadastral Service", lifespan=lifespan)

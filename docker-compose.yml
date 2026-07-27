@@ -24,7 +24,7 @@ services:
     build: .
     container_name: cadastral_service_app
     ports:
-      - "8080:8000"
+      - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
