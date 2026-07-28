@@ -34,10 +34,16 @@ API - сервис, который принимает запрос с указа
   │   ├── main.py
   │   ├── models.py
   │   └── schemas.py
+  ├── tests/
+  │   ├── __init__.py
+  │   ├── conftest.py
+  │   └── test_api.py
   ├── README.md
   ├── .env
   ├── .env.example
   ├── alembic.ini
+  ├── pytest.ini
+  ├── init-test-db.sql
   ├── .gitignore
   ├── requirements.txt
   ├── Dockerfile
@@ -62,7 +68,7 @@ API - сервис, который принимает запрос с указа
   ```
 - Linux/macOS:
   ```
-  source .venv/Scripts/activate
+  source .venv/bin/activate
   ```
 
 3. Создайте переменные окружения (файл .env) по примеру .env.example
@@ -101,7 +107,7 @@ API - сервис, который принимает запрос с указа
   docker-compose down -v
   ```
 
-## Создание миграций БД
+## Создание миграций БД (Alembic)
   ```
   docker-compose run --rm app alembic revision --autogenerate -m "комментарий"
   ```
@@ -166,3 +172,16 @@ API - сервис, который принимает запрос с указа
     }
   ]
   ```
+
+## Запуск тестирования внутри Docker-контейнера 
+  ```
+  docker-compose run --rm app pytest -v
+  ```
+
+
+## Автор
+Владислав
+telegram: @vlad_705
+[e-mail](vlad.prickly@gmail.com)
+[github.com](https://github.com/VladPrickly)
+
