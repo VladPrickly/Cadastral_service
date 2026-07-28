@@ -6,10 +6,10 @@ API - сервис, который принимает запрос с указа
 Данные запроса на сервер и ответ с внешнего сервера сохранены в БД. 
 
 Сервис содержит следующие эндпоинты:
- - "/query" - принимает кадастровый номер
- - "/ping" - проверка, что сервер запустился
- - "/history" - для получения истории запросов
- - "/result" - эндпоинт эмулируемоего сервера, который возвращает true или false
+ - "POST /query" - принимает кадастровый номер
+ - "GET /ping" - проверка, что сервер запустился
+ - "GET /history" - для получения истории запросов
+ - "GET /result" - эндпоинт эмулируемоего сервера, который возвращает true или false
  - "/docs" - документация Swagger для тестирования API
  - "/redoc" - документация ReDoc для тестирования API
 
@@ -22,6 +22,10 @@ API - сервис, который принимает запрос с указа
 ## Структура проекта
   ```
   cadastral_service/
+  ├── alembic/
+  │   ├── versions/
+  │   ├── env.py
+  │   ├── script.py.mako
   ├── app/
   │   ├── __init__.py
   │   ├── config.py
@@ -32,13 +36,15 @@ API - сервис, который принимает запрос с указа
   │   └── schemas.py
   ├── README.md
   ├── .env
+  ├── .env.example
+  ├── alembic.ini
   ├── .gitignore
   ├── requirements.txt
   ├── Dockerfile
   └── docker-compose.yml
   ```
 
-## Установка и удаление
+## Локальная установка и удаление
 1. Создайте виртуальное окружение:
 - Windows:
   ```
@@ -52,14 +58,32 @@ API - сервис, который принимает запрос с указа
 2. Активируйте виртуальное окружение:
 - Windows:
   ```
-  venv\Scripts\activate
+  .venv\Scripts\activate
   ```
 - Linux/macOS:
   ```
-  source venv/bin/activate
+  source .venv/Scripts/activate
   ```
 
-3. Запуск приложения и создание БД:
+3. Создайте переменные окружения (файл .env) по примеру .env.example
+  ```
+  POSTGRES_USER=user
+  POSTGRES_PASSWORD=12345
+  POSTGRES_DB=cadastral_db
+  POSTGRES_HOST=db
+  POSTGRES_PORT=5432
+  ```
+
+4. Установите зависимости
+  ```
+  pip install -r requirements.txt
+  ```
+
+5. Запустите приложение
+  ```
+  uvicorn app.main:app --reload --port 8000
+  ```
+## Запуск приложения и создание БД
   ```
   docker-compose build
   docker-compose up
@@ -67,19 +91,34 @@ API - сервис, который принимает запрос с указа
   Приложение запустится локально на http://127.0.0.1:8000/. БД будет создана при первом запуске.
   ```
 
-4. Остановка приложения:
+## Остановка приложения:
   ```
   docker-compose down
   ```
 
-5. Удаление контейнеров и томов:
+## Удаление контейнеров и томов:
   ```
   docker-compose down -v
   ```
 
+## Создание миграций БД
+  ```
+  docker-compose run --rm app alembic revision --autogenerate -m "комментарий"
+  ```
+
+## Применение миграций БД
+  ```
+  docker-compose run --rm app alembic upgrade head
+  ```
+
+## Откатить последнюю миграцию
+  ```
+  docker-compose run --rm app alembic downgrade -1
+  ```
+
 ## Проверка работы
   ```
-  curl http://localhost:8000/ping
+  curl http://127.0.0.1:8000/ping
   Ожидаемый ответ: 
   {"status":"ok"}
   ```
@@ -100,13 +139,13 @@ API - сервис, который принимает запрос с указа
   ```
 
   ```
-  curl http://localhost:8000/result
+  curl http://127.0.0.1:8000/result
   Ожидаемый ответ:
   {"result":true}
   ```
 
   ```
-  curl http://localhost:8000/history
+  curl http://127.0.0.1:8000/history
   Ожидаемый ответ:
   [
     {

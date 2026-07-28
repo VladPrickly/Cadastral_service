@@ -12,3 +12,10 @@ class CadastralQuery(Base):
     longitude = Column(Float, nullable=False)
     result = Column(Boolean, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+
+class TestModel(Base):
+    __tablename__ = "test_table"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
