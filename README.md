@@ -22,10 +22,6 @@ API - сервис, который принимает запрос с указа
 ## Структура проекта
   ```
   cadastral_service/
-  ├── alembic/
-  │   ├── versions/
-  │   ├── env.py
-  │   ├── script.py.mako
   ├── app/
   │   ├── __init__.py
   │   ├── config.py
@@ -34,6 +30,10 @@ API - сервис, который принимает запрос с указа
   │   ├── main.py
   │   ├── models.py
   │   └── schemas.py
+  ├── alembic/
+  │   ├── versions/
+  │   ├── env.py
+  │   └── script.py.mako
   ├── tests/
   │   ├── __init__.py
   │   ├── conftest.py
@@ -50,7 +50,7 @@ API - сервис, который принимает запрос с указа
   └── docker-compose.yml
   ```
 
-## Локальная установка и удаление
+## Локальная установка 
 1. Создайте виртуальное окружение:
 - Windows:
   ```
@@ -180,8 +180,8 @@ API - сервис, который принимает запрос с указа
 
 
 ## Автор
-Владислав
-telegram: @vlad_705
-[e-mail](vlad.prickly@gmail.com)
-[github.com](https://github.com/VladPrickly)
+- Владислав
+- telegram: @vlad_705
+- [e-mail](vlad.prickly@gmail.com)
+- [github.com](https://github.com/VladPrickly)
 
